@@ -40,6 +40,7 @@ public:
     QAction *actionLaunch_magnifier;
     QAction *actionGama;
     QAction *actionMirroring;
+    QAction *actionThresholding;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QScrollArea *scrollArea;
@@ -84,6 +85,8 @@ public:
         actionGama->setObjectName(QStringLiteral("actionGama"));
         actionMirroring = new QAction(MainWindow);
         actionMirroring->setObjectName(QStringLiteral("actionMirroring"));
+        actionThresholding = new QAction(MainWindow);
+        actionThresholding->setObjectName(QStringLiteral("actionThresholding"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -183,6 +186,7 @@ public:
         menuTools->addAction(actionPlot_grey_level);
         menuTools->addAction(actionLaunch_magnifier);
         menuTema1->addAction(actionMirroring);
+        menuTema1->addAction(actionThresholding);
 
         retranslateUi(MainWindow);
 
@@ -201,6 +205,7 @@ public:
         actionLaunch_magnifier->setText(QApplication::translate("MainWindow", "Launch magnifier", Q_NULLPTR));
         actionGama->setText(QApplication::translate("MainWindow", "Gama", Q_NULLPTR));
         actionMirroring->setText(QApplication::translate("MainWindow", "Mirroring", Q_NULLPTR));
+        actionThresholding->setText(QApplication::translate("MainWindow", "Thresholding", Q_NULLPTR));
         label->setText(QString());
         label_2->setText(QString());
         btnSaveAsInitialImage->setText(QApplication::translate("MainWindow", "Save as Initial Image", Q_NULLPTR));

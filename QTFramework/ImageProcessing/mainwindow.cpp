@@ -408,3 +408,23 @@ void MainWindow::on_actionMirroring_triggered()
     }
     updateImages(false);
 }
+
+void MainWindow::on_actionThresholding_triggered()
+{
+    bool val;
+    SmartDialog tresholding("Val: ", &val);
+    if(initialImage== nullptr)
+    {
+        return;
+    }
+    for (int i = 0;  i < initialImage->width();  i++)
+    {
+        for (int j = 0; j < initialImage->height(); j++)
+        {
+            int gray = qGray(initialImage->pixel(i,j));
+            gray = gray < val ? 0 : 255;
+            initialImage->setPixel(i,j,QColor(gray, gray, gray).rgb());
+        }
+    }
+     updateImages(false);
+}

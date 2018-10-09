@@ -38,6 +38,7 @@ private slots:
     void on_actionLaunch_magnifier_triggered();
     void on_actionGama_triggered();
     void on_actionMirroring_triggered();
+    void on_actionThresholding_triggered();
 
 private:
     void toGreyScale(QImage* image);

@@ -164,6 +164,7 @@
      <string>Tema1</string>
     </property>
     <addaction name="actionMirroring"/>
+    <addaction name="actionThresholding"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuLaunch_Smart_Dialog"/>
@@ -222,6 +223,11 @@
   <action name="actionMirroring">
    <property name="text">
     <string>Mirroring</string>
+   </property>
+  </action>
+  <action name="actionThresholding">
+   <property name="text">
+    <string>Thresholding</string>
    </property>
   </action>
  </widget>
