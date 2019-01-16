@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <iostream>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -411,11 +412,11 @@ void MainWindow::on_actionMirroring_triggered()
 }
 
 //threshholding
-
 void MainWindow::on_actionThresholding_triggered()
 {
     bool val;
     SmartDialog tresholding("Val: ", &val);
+    double t = tresholding.getFirstValue();
     if(initialImage== nullptr)
     {
         return;
@@ -425,7 +426,7 @@ void MainWindow::on_actionThresholding_triggered()
         for (int j = 0; j < initialImage->height(); j++)
         {
             int gray = qGray(initialImage->pixel(i,j));
-            gray = gray < val ? 0 : 255;
+            gray = gray < t ? 0 : 255;
             initialImage->setPixel(i,j,QColor(gray, gray, gray).rgb());
         }
     }
@@ -531,4 +532,50 @@ void MainWindow::on_actionBrightnessDiminishing_triggered()
 
 /*TEMA3///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
+void MainWindow::on_actionColorBinarization_triggered()
+{
+    bool ok;
+    modifiedImage = new QImage( initialImage->width(),initialImage->height(),QImage::Format_RGB888);
+        SmartDialog Point("Coordonate(X1,Y2)",&ok,2);
+        SmartDialog Point2("Threshold",&ok,1);
+        if(ok){
+            int x =Point.getFirstValue();
+            int y =Point.getsecondValue();
+            double t = Point2.getFirstValue();
+            QColor rgb=initialImage->pixel(QPoint(x,y));
+
+            int r0,g0,b0;
+            r0=rgb.red();
+            g0=rgb.green();
+            b0=rgb.blue();
+            for(int i=0;i<initialImage->width();i++){
+                for(int j=0;j<initialImage->height();j++){
+
+                    QColor image=initialImage->pixel(i,j);
+                    int imgRed,imgGreen,imgBlue;
+                    imgRed=image.red();
+                    imgGreen=image.green();
+                    imgBlue=image.blue();
+
+                    double def=sqrt(((imgRed-r0)*(imgRed-r0))+((imgGreen-g0)*(imgGreen-g0))+((imgBlue-b0)*(imgBlue-b0)));
+                    QRgb white = qRgb(255,255,255);
+                    QRgb black = qRgb(0, 0, 0);
+                    if(def<=t){
+
+                        modifiedImage->setPixel(i,j,white);
+                    }else{
+
+                        modifiedImage->setPixel(i,j,qRgb(0, 0, 0));
+                    }
+                }
+            }
+            updateImages(false);
+
+        }
+}
+
+/*END TEMA3////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+
+/*TEMA4///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 

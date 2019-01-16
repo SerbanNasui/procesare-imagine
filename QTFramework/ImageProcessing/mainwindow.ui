@@ -174,11 +174,18 @@
     <addaction name="actionBrightnessIncreasing"/>
     <addaction name="actionBrightnessDiminishing"/>
    </widget>
+   <widget class="QMenu" name="menuTema3">
+    <property name="title">
+     <string>Tema3</string>
+    </property>
+    <addaction name="actionColorBinarization"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuLaunch_Smart_Dialog"/>
    <addaction name="menuTools"/>
    <addaction name="menuTema1"/>
    <addaction name="menuTema2"/>
+   <addaction name="menuTema3"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -252,6 +259,11 @@
   <action name="actionBrightnessDiminishing">
    <property name="text">
     <string>BrightnessDiminishing</string>
+   </property>
+  </action>
+  <action name="actionColorBinarization">
+   <property name="text">
+    <string>ColorBinarization</string>
    </property>
   </action>
  </widget>

@@ -42,6 +42,8 @@ private slots:
     void on_actionHistogram_triggered();
     void on_actionBrightnessIncreasing_triggered();
     void on_actionBrightnessDiminishing_triggered();
+    void on_actionColorBinarization_triggered();
+
 
 
 private:
@@ -56,6 +58,9 @@ private:
     int* histogram();
 
 private:
+    int x;
+    int y;
+    bool param;
     QMap<QString,double>* transientData;
     QImage* initialImage;
     QString initialImagePath;

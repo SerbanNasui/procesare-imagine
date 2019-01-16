@@ -43,3 +43,10 @@ double SmartDialog::getFirstValue()
     double firstValue=inputValues[firstKey]->text().toDouble();
     return firstValue;
 }
+
+double SmartDialog::getsecondValue()
+{
+    QString secondKey=QString(dialog->windowTitle()+"2");
+    double secondValue=inputValues[secondKey]->text().toDouble();
+    return secondValue;
+}

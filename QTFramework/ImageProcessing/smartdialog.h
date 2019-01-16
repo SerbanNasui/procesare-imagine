@@ -17,6 +17,7 @@ public:
     SmartDialog(QString name,bool* ok, short numberOfLabels =1 ,QWidget* widget= nullptr);
     QMap<QString,double> getValues();
     double getFirstValue();
+    double getsecondValue();
 private:
     QMap<QString, QLineEdit*> inputValues;
     QDialog* dialog;
