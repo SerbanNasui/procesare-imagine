@@ -41,6 +41,9 @@ public:
     QAction *actionGama;
     QAction *actionMirroring;
     QAction *actionThresholding;
+    QAction *actionHistogram;
+    QAction *actionBrightnessIncreasing;
+    QAction *actionBrightnessDiminishing;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QScrollArea *scrollArea;
@@ -59,6 +62,7 @@ public:
     QMenu *menuLaunch_Smart_Dialog_2;
     QMenu *menuTools;
     QMenu *menuTema1;
+    QMenu *menuTema2;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -87,6 +91,12 @@ public:
         actionMirroring->setObjectName(QStringLiteral("actionMirroring"));
         actionThresholding = new QAction(MainWindow);
         actionThresholding->setObjectName(QStringLiteral("actionThresholding"));
+        actionHistogram = new QAction(MainWindow);
+        actionHistogram->setObjectName(QStringLiteral("actionHistogram"));
+        actionBrightnessIncreasing = new QAction(MainWindow);
+        actionBrightnessIncreasing->setObjectName(QStringLiteral("actionBrightnessIncreasing"));
+        actionBrightnessDiminishing = new QAction(MainWindow);
+        actionBrightnessDiminishing->setObjectName(QStringLiteral("actionBrightnessDiminishing"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -163,6 +173,8 @@ public:
         menuTools->setObjectName(QStringLiteral("menuTools"));
         menuTema1 = new QMenu(menuBar);
         menuTema1->setObjectName(QStringLiteral("menuTema1"));
+        menuTema2 = new QMenu(menuBar);
+        menuTema2->setObjectName(QStringLiteral("menuTema2"));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -175,6 +187,7 @@ public:
         menuBar->addAction(menuLaunch_Smart_Dialog->menuAction());
         menuBar->addAction(menuTools->menuAction());
         menuBar->addAction(menuTema1->menuAction());
+        menuBar->addAction(menuTema2->menuAction());
         menuFile->addAction(menuOpen->menuAction());
         menuFile->addAction(actionSave_as);
         menuOpen->addAction(actionGreyscale);
@@ -187,6 +200,9 @@ public:
         menuTools->addAction(actionLaunch_magnifier);
         menuTema1->addAction(actionMirroring);
         menuTema1->addAction(actionThresholding);
+        menuTema1->addAction(actionHistogram);
+        menuTema2->addAction(actionBrightnessIncreasing);
+        menuTema2->addAction(actionBrightnessDiminishing);
 
         retranslateUi(MainWindow);
 
@@ -206,6 +222,9 @@ public:
         actionGama->setText(QApplication::translate("MainWindow", "Gama", Q_NULLPTR));
         actionMirroring->setText(QApplication::translate("MainWindow", "Mirroring", Q_NULLPTR));
         actionThresholding->setText(QApplication::translate("MainWindow", "Thresholding", Q_NULLPTR));
+        actionHistogram->setText(QApplication::translate("MainWindow", "Histogram", Q_NULLPTR));
+        actionBrightnessIncreasing->setText(QApplication::translate("MainWindow", "BrightnessIncreasing", Q_NULLPTR));
+        actionBrightnessDiminishing->setText(QApplication::translate("MainWindow", "BrightnessDiminishing", Q_NULLPTR));
         label->setText(QString());
         label_2->setText(QString());
         btnSaveAsInitialImage->setText(QApplication::translate("MainWindow", "Save as Initial Image", Q_NULLPTR));
@@ -215,6 +234,7 @@ public:
         menuLaunch_Smart_Dialog_2->setTitle(QApplication::translate("MainWindow", "Launch Smart Dialog", Q_NULLPTR));
         menuTools->setTitle(QApplication::translate("MainWindow", "Tools", Q_NULLPTR));
         menuTema1->setTitle(QApplication::translate("MainWindow", "Tema1", Q_NULLPTR));
+        menuTema2->setTitle(QApplication::translate("MainWindow", "Tema2", Q_NULLPTR));
     } // retranslateUi
 
 };

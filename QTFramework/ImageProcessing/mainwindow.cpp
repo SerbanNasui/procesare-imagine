@@ -348,7 +348,6 @@ void MainWindow::plotGreyPixels(int y, QImage* image) const
     greyPlotterDialog->refresh();
 }
 
-
 /*
    Sets to visible the magnifier dialog.
  */
@@ -385,6 +384,8 @@ void MainWindow::on_actionGama_triggered()
     }
 }
 
+/*TEMA1///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+//oglindit
 void MainWindow::on_actionMirroring_triggered()
 {
     if(initialImage == nullptr)
@@ -409,6 +410,8 @@ void MainWindow::on_actionMirroring_triggered()
     updateImages(false);
 }
 
+//threshholding
+
 void MainWindow::on_actionThresholding_triggered()
 {
     bool val;
@@ -426,5 +429,106 @@ void MainWindow::on_actionThresholding_triggered()
             initialImage->setPixel(i,j,QColor(gray, gray, gray).rgb());
         }
     }
-     updateImages(false);
+    updateImages(false);
 }
+
+// histogama
+int* MainWindow::histogram()
+{
+    int v[256];
+    for (int i = 0;  i < initialImage->width();  i++)
+        for (int j = 0; j < initialImage->height(); j++)
+        {
+            int gray = qGray(initialImage->pixel(i,j));
+            v[gray]++;
+        }
+    return v;
+}
+void MainWindow::on_actionHistogram_triggered()
+{
+
+}
+
+/*END TEMA1///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+/*TEMA2///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+void MainWindow::on_actionBrightnessIncreasing_triggered()
+{
+    modifiedImage = new QImage( initialImage->width(),initialImage->height(),QImage::Format_RGB888);
+    bool ok=false;
+    SmartDialog dialog2("Modify Brightness and Contrast",&ok,1);
+    if(ok)
+    {
+        int value=dialog2.getFirstValue();
+        int lookUpTable[256];
+        for(int i=0 ; i<256 ; i++)
+        {
+            int a;
+            a=i;
+            lookUpTable[i]=a+value;
+            if(lookUpTable[i]>255)
+            {
+                lookUpTable[i]=255;
+            }
+            qDebug()<<"LookUpTable["<<i<<"]"<<lookUpTable[i]<<endl;}
+        for(int i=0;i<initialImage->width();i++)
+        {
+            for(int j=0;j<initialImage->height();j++)
+            {
+                int color=initialImage->pixelColor(i,j).value();
+                modifiedImage->setPixel(i,j,qRgb(lookUpTable[color],lookUpTable[color],lookUpTable[color]));
+            }
+        }
+    }else{
+        QMessageBox messageBox;
+        messageBox.critical(0,"Error","You must to insert a value bigger than 0 and smaller than 256");
+        messageBox.setFixedSize(500,200);
+        on_actionBrightnessIncreasing_triggered();
+    }
+    updateImages(false);
+}
+
+void MainWindow::on_actionBrightnessDiminishing_triggered()
+{
+    modifiedImage = new QImage( initialImage->width(),initialImage->height(),QImage::Format_RGB888);
+    bool ok=false;
+    SmartDialog dialog2("Modify Brightness and Contrast",&ok,1);
+    if(ok)
+    {
+        int val=dialog2.getFirstValue();
+        if(val<=255&&val>=0){
+            int value=val;
+            int lookUpTable[256];
+            for(int i=0 ; i<256 ; i++)
+            {
+                int a=i;
+                lookUpTable[i]=a-value;
+                if(lookUpTable[i]<0)
+                {
+                    lookUpTable[i]=0;
+                }
+                qDebug()<<"LookUpTable["<<i<<"]"<<lookUpTable[i]<<endl;
+            }
+            for(int i=0;i<initialImage->width();i++)
+            {
+                for(int j=0;j<initialImage->height();j++)
+                {
+                    int color=initialImage->pixelColor(i,j).value();
+                    modifiedImage->setPixel(i,j,qRgb(lookUpTable[color],lookUpTable[color],lookUpTable[color]));
+                }
+            }
+        }else
+        {   QMessageBox messageBox;
+            messageBox.critical(0,"Error","You must to insert a value bigger than 0 and smaller than 256!");
+            messageBox.setFixedSize(500,200);
+            on_actionBrightnessDiminishing_triggered();
+        }
+    }
+    updateImages(false);
+}
+
+/*END TEMA2///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+/*TEMA3///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+

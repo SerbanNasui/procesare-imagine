@@ -39,6 +39,10 @@ private slots:
     void on_actionGama_triggered();
     void on_actionMirroring_triggered();
     void on_actionThresholding_triggered();
+    void on_actionHistogram_triggered();
+    void on_actionBrightnessIncreasing_triggered();
+    void on_actionBrightnessDiminishing_triggered();
+
 
 private:
     void toGreyScale(QImage* image);
@@ -49,6 +53,7 @@ private:
     bool isMousedPressedOnInitialImage(QObject *obj, QEvent *event);
     bool isMousedPressedOnModifiedImage(QObject *obj, QEvent *event);
     void plotGreyPixels(int y, QImage* image) const;
+    int* histogram();
 
 private:
     QMap<QString,double>* transientData;

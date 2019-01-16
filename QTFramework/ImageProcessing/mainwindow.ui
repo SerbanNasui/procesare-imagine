@@ -165,11 +165,20 @@
     </property>
     <addaction name="actionMirroring"/>
     <addaction name="actionThresholding"/>
+    <addaction name="actionHistogram"/>
+   </widget>
+   <widget class="QMenu" name="menuTema2">
+    <property name="title">
+     <string>Tema2</string>
+    </property>
+    <addaction name="actionBrightnessIncreasing"/>
+    <addaction name="actionBrightnessDiminishing"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuLaunch_Smart_Dialog"/>
    <addaction name="menuTools"/>
    <addaction name="menuTema1"/>
+   <addaction name="menuTema2"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -228,6 +237,21 @@
   <action name="actionThresholding">
    <property name="text">
     <string>Thresholding</string>
+   </property>
+  </action>
+  <action name="actionHistogram">
+   <property name="text">
+    <string>Histogram</string>
+   </property>
+  </action>
+  <action name="actionBrightnessIncreasing">
+   <property name="text">
+    <string>BrightnessIncreasing</string>
+   </property>
+  </action>
+  <action name="actionBrightnessDiminishing">
+   <property name="text">
+    <string>BrightnessDiminishing</string>
    </property>
   </action>
  </widget>
