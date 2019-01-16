@@ -43,6 +43,8 @@ private slots:
     void on_actionBrightnessIncreasing_triggered();
     void on_actionBrightnessDiminishing_triggered();
     void on_actionColorBinarization_triggered();
+    void on_actionMeanFilter_triggered();
+
 
 
 

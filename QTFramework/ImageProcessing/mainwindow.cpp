@@ -421,6 +421,7 @@ void MainWindow::on_actionThresholding_triggered()
     {
         return;
     }
+    modifiedImage = new QImage( initialImage->width(),initialImage->height(),QImage::Format_RGB32);
     for (int i = 0;  i < initialImage->width();  i++)
     {
         for (int j = 0; j < initialImage->height(); j++)
@@ -579,3 +580,37 @@ void MainWindow::on_actionColorBinarization_triggered()
 
 /*TEMA4///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
+void MainWindow::on_actionMeanFilter_triggered()
+{
+    modifiedImage = new QImage( initialImage->width(),initialImage->height(),QImage::Format_RGB888);
+    bool ok;
+    SmartDialog dialog3("Insert a value:",&ok,1);
+    if(ok)
+    {
+        double value=dialog3.getFirstValue();
+        int k = value/2;
+
+        for(int i=k ; i<initialImage->width()-k-1;i++){
+            for(int j=k;j<initialImage->height()-k-1;j++){
+                double sum=0;
+
+                for(int a=-k;a<=k;a++){
+                    for(int b=-k;b<=k;b++){
+
+                        sum+=qGray(initialImage->pixel(i+a,j+b));
+
+                    }
+                }
+                auto average=sum/(value*value);
+                modifiedImage->setPixel(i,j,qRgb(average,average,average));
+            }
+        }
+
+
+    }
+    updateImages(false);
+}
+
+/*END TEMA4///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+/*TEMA5 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/

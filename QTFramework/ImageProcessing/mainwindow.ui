@@ -180,12 +180,19 @@
     </property>
     <addaction name="actionColorBinarization"/>
    </widget>
+   <widget class="QMenu" name="menuTema4">
+    <property name="title">
+     <string>Tema4</string>
+    </property>
+    <addaction name="actionMeanFilter"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuLaunch_Smart_Dialog"/>
    <addaction name="menuTools"/>
    <addaction name="menuTema1"/>
    <addaction name="menuTema2"/>
    <addaction name="menuTema3"/>
+   <addaction name="menuTema4"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -264,6 +271,11 @@
   <action name="actionColorBinarization">
    <property name="text">
     <string>ColorBinarization</string>
+   </property>
+  </action>
+  <action name="actionMeanFilter">
+   <property name="text">
+    <string>MeanFilter</string>
    </property>
   </action>
  </widget>

@@ -45,6 +45,7 @@ public:
     QAction *actionBrightnessIncreasing;
     QAction *actionBrightnessDiminishing;
     QAction *actionColorBinarization;
+    QAction *actionMeanFilter;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QScrollArea *scrollArea;
@@ -65,6 +66,7 @@ public:
     QMenu *menuTema1;
     QMenu *menuTema2;
     QMenu *menuTema3;
+    QMenu *menuTema4;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -101,6 +103,8 @@ public:
         actionBrightnessDiminishing->setObjectName(QStringLiteral("actionBrightnessDiminishing"));
         actionColorBinarization = new QAction(MainWindow);
         actionColorBinarization->setObjectName(QStringLiteral("actionColorBinarization"));
+        actionMeanFilter = new QAction(MainWindow);
+        actionMeanFilter->setObjectName(QStringLiteral("actionMeanFilter"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -181,6 +185,8 @@ public:
         menuTema2->setObjectName(QStringLiteral("menuTema2"));
         menuTema3 = new QMenu(menuBar);
         menuTema3->setObjectName(QStringLiteral("menuTema3"));
+        menuTema4 = new QMenu(menuBar);
+        menuTema4->setObjectName(QStringLiteral("menuTema4"));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -195,6 +201,7 @@ public:
         menuBar->addAction(menuTema1->menuAction());
         menuBar->addAction(menuTema2->menuAction());
         menuBar->addAction(menuTema3->menuAction());
+        menuBar->addAction(menuTema4->menuAction());
         menuFile->addAction(menuOpen->menuAction());
         menuFile->addAction(actionSave_as);
         menuOpen->addAction(actionGreyscale);
@@ -211,6 +218,7 @@ public:
         menuTema2->addAction(actionBrightnessIncreasing);
         menuTema2->addAction(actionBrightnessDiminishing);
         menuTema3->addAction(actionColorBinarization);
+        menuTema4->addAction(actionMeanFilter);
 
         retranslateUi(MainWindow);
 
@@ -234,6 +242,7 @@ public:
         actionBrightnessIncreasing->setText(QApplication::translate("MainWindow", "BrightnessIncreasing", Q_NULLPTR));
         actionBrightnessDiminishing->setText(QApplication::translate("MainWindow", "BrightnessDiminishing", Q_NULLPTR));
         actionColorBinarization->setText(QApplication::translate("MainWindow", "ColorBinarization", Q_NULLPTR));
+        actionMeanFilter->setText(QApplication::translate("MainWindow", "MeanFilter", Q_NULLPTR));
         label->setText(QString());
         label_2->setText(QString());
         btnSaveAsInitialImage->setText(QApplication::translate("MainWindow", "Save as Initial Image", Q_NULLPTR));
@@ -245,6 +254,7 @@ public:
         menuTema1->setTitle(QApplication::translate("MainWindow", "Tema1", Q_NULLPTR));
         menuTema2->setTitle(QApplication::translate("MainWindow", "Tema2", Q_NULLPTR));
         menuTema3->setTitle(QApplication::translate("MainWindow", "Tema3", Q_NULLPTR));
+        menuTema4->setTitle(QApplication::translate("MainWindow", "Tema4", Q_NULLPTR));
     } // retranslateUi
 
 };
