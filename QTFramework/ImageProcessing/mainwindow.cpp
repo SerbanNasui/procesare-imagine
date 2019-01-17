@@ -123,8 +123,8 @@ void MainWindow::loadImages()
     int height=image->height();
     int count=image->bitPlaneCount();
 
-   // qDebug()<<count;
-   if(count==8)
+    // qDebug()<<count;
+    if(count==8)
     {
 
         initialImage=new QImage(width,height,QImage::Format_RGB32);
@@ -133,12 +133,12 @@ void MainWindow::loadImages()
             for(int j=0;j<height;j++)
             {
                 byte cl=qGray(image->pixel(i,j));
-               //QRgb cl=image->pixel(i,j);
-               //initialImage->setPixelColor(i,j,cl);
-               initialImage->setPixelColor(i,j,qRgb(cl,cl,cl));
+                //QRgb cl=image->pixel(i,j);
+                //initialImage->setPixelColor(i,j,cl);
+                initialImage->setPixelColor(i,j,qRgb(cl,cl,cl));
             }
         }
-    qDebug()<<count;
+        qDebug()<<count;
         delete image;
     }
     else
@@ -149,10 +149,10 @@ void MainWindow::loadImages()
     {
         delete modifiedImage;
     }
-	modifiedImage = nullptr;
-	
+    modifiedImage = nullptr;
+
     //modifiedImage = new QImage(imagePath);
-  //  modifiedImage = new QImage(width,height,QImage::Format_RGB32);
+    //  modifiedImage = new QImage(width,height,QImage::Format_RGB32);
 
 
 }
@@ -168,16 +168,16 @@ void MainWindow::updateImages(bool isOpen)
         QPixmap pixMapInitial = QPixmap::fromImage(*initialImage);
 
         ui->label->setPixmap(pixMapInitial);
-		if (modifiedImage != nullptr)
-		{
-			QPixmap pixMapModified = QPixmap::fromImage(*modifiedImage);
+        if (modifiedImage != nullptr)
+        {
+            QPixmap pixMapModified = QPixmap::fromImage(*modifiedImage);
 
-			if (!isOpen) {
-				ui->label_2->setPixmap(pixMapModified);
-			}
-		}
-		else
-			ui->label_2->setPixmap(QPixmap());
+            if (!isOpen) {
+                ui->label_2->setPixmap(pixMapModified);
+            }
+        }
+        else
+            ui->label_2->setPixmap(QPixmap());
     }
 }
 
@@ -189,7 +189,7 @@ void MainWindow::on_btnSaveAsInitialImage_clicked()
     if(modifiedImage!= nullptr)
     {
         initialImage= new QImage(*modifiedImage);
-      //  initialImage->save(initialImagePath);
+        //  initialImage->save(initialImagePath);
         updateImages(true);
     }
 }
@@ -232,10 +232,10 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
             {
                 launchMagnifierDialog(mouseX,mouseY, modifiedImage);
             }
-			if (initialImage!=nullptr)
-				plotGreyPixels(mouseY, initialImage);
-			if (modifiedImage!=nullptr)
-				plotGreyPixels(mouseY,modifiedImage);
+            if (initialImage!=nullptr)
+                plotGreyPixels(mouseY, initialImage);
+            if (modifiedImage!=nullptr)
+                plotGreyPixels(mouseY,modifiedImage);
             return true;
         }
     }
@@ -311,41 +311,41 @@ void MainWindow::on_actionPlot_grey_level_triggered()
 void MainWindow::plotGreyPixels(int y, QImage* image) const
 {
 
-	if (greyPlotterDialog == nullptr)
-	{
-		return;
-	}
+    if (greyPlotterDialog == nullptr)
+    {
+        return;
+    }
 
-	if (image != nullptr)
-	{
-		for (int j = 0; j < initialImage->width(); j++)
-		{
+    if (image != nullptr)
+    {
+        for (int j = 0; j < initialImage->width(); j++)
+        {
 
 
-			int gray = qGray(image->pixel(j, y));
-			if (image == initialImage)
-			{
-				greyPlotterDialog->plotValuesToFirstGraph(j, gray);
-			}
-			else
-			{
-				greyPlotterDialog->plotValuesToSecondGraph(j, gray);
-			}
-			qDebug() << QString("qGray (%1)").arg(gray);
-		}
-	}
-	else
-	{
-		if (initialImage == nullptr)
-		{
-			greyPlotterDialog->clearValuesToFirstGraph();
-		}
+            int gray = qGray(image->pixel(j, y));
+            if (image == initialImage)
+            {
+                greyPlotterDialog->plotValuesToFirstGraph(j, gray);
+            }
+            else
+            {
+                greyPlotterDialog->plotValuesToSecondGraph(j, gray);
+            }
+            qDebug() << QString("qGray (%1)").arg(gray);
+        }
+    }
+    else
+    {
+        if (initialImage == nullptr)
+        {
+            greyPlotterDialog->clearValuesToFirstGraph();
+        }
 
-		if (modifiedImage == nullptr)
-		{
-			greyPlotterDialog->clearValuesToFirstGraph();
-		}
-	}
+        if (modifiedImage == nullptr)
+        {
+            greyPlotterDialog->clearValuesToFirstGraph();
+        }
+    }
     greyPlotterDialog->refresh();
 }
 
@@ -415,23 +415,23 @@ void MainWindow::on_actionMirroring_triggered()
 void MainWindow::on_actionThresholding_triggered()
 {
     bool val;
-       SmartDialog tresholding("Val: ", &val);
-       double t = tresholding.getFirstValue();
-       if(initialImage== nullptr)
-       {
-           return;
-       }
-       modifiedImage = new QImage( initialImage->width(),initialImage->height(),QImage::Format_RGB32);
-       for (int i = 0;  i < initialImage->width();  i++)
-       {
-           for (int j = 0; j < initialImage->height(); j++)
-           {
-               int gray = qGray(initialImage->pixel(i,j));
-               gray = gray < t ? 0 : 255;
-               modifiedImage->setPixel(i,j,QColor(gray, gray, gray).rgb());
-           }
-       }
-       updateImages(false);
+    SmartDialog tresholding("Val: ", &val);
+    double t = tresholding.getFirstValue();
+    if(initialImage== nullptr)
+    {
+        return;
+    }
+    modifiedImage = new QImage( initialImage->width(),initialImage->height(),QImage::Format_RGB32);
+    for (int i = 0;  i < initialImage->width();  i++)
+    {
+        for (int j = 0; j < initialImage->height(); j++)
+        {
+            int gray = qGray(initialImage->pixel(i,j));
+            gray = gray < t ? 0 : 255;
+            modifiedImage->setPixel(i,j,QColor(gray, gray, gray).rgb());
+        }
+    }
+    updateImages(false);
 
 }
 
@@ -533,42 +533,42 @@ void MainWindow::on_actionColorBinarization_triggered()
 {
     bool ok;
     modifiedImage = new QImage( initialImage->width(),initialImage->height(),QImage::Format_RGB888);
-        SmartDialog Point("Coordonate(X1,Y2)",&ok,2);
-        SmartDialog Point2("Threshold",&ok,1);
-        if(ok){
-            int x =Point.getFirstValue();
-            int y =Point.getsecondValue();
-            double t = Point2.getFirstValue();
-            QColor rgb=initialImage->pixel(QPoint(x,y));
+    SmartDialog Point("Coordonate(X1,Y2)",&ok,2);
+    SmartDialog Point2("Threshold",&ok,1);
+    if(ok){
+        int x =Point.getFirstValue();
+        int y =Point.getsecondValue();
+        double t = Point2.getFirstValue();
+        QColor rgb=initialImage->pixel(QPoint(x,y));
 
-            int r0,g0,b0;
-            r0=rgb.red();
-            g0=rgb.green();
-            b0=rgb.blue();
-            for(int i=0;i<initialImage->width();i++){
-                for(int j=0;j<initialImage->height();j++){
+        int r0,g0,b0;
+        r0=rgb.red();
+        g0=rgb.green();
+        b0=rgb.blue();
+        for(int i=0;i<initialImage->width();i++){
+            for(int j=0;j<initialImage->height();j++){
 
-                    QColor image=initialImage->pixel(i,j);
-                    int imgRed,imgGreen,imgBlue;
-                    imgRed=image.red();
-                    imgGreen=image.green();
-                    imgBlue=image.blue();
+                QColor image=initialImage->pixel(i,j);
+                int imgRed,imgGreen,imgBlue;
+                imgRed=image.red();
+                imgGreen=image.green();
+                imgBlue=image.blue();
 
-                    double def=sqrt(((imgRed-r0)*(imgRed-r0))+((imgGreen-g0)*(imgGreen-g0))+((imgBlue-b0)*(imgBlue-b0)));
-                    QRgb white = qRgb(255,255,255);
-                    QRgb black = qRgb(0, 0, 0);
-                    if(def<=t){
+                double def=sqrt(((imgRed-r0)*(imgRed-r0))+((imgGreen-g0)*(imgGreen-g0))+((imgBlue-b0)*(imgBlue-b0)));
+                QRgb white = qRgb(255,255,255);
+                QRgb black = qRgb(0, 0, 0);
+                if(def<=t){
 
-                        modifiedImage->setPixel(i,j,white);
-                    }else{
+                    modifiedImage->setPixel(i,j,white);
+                }else{
 
-                        modifiedImage->setPixel(i,j,qRgb(0, 0, 0));
-                    }
+                    modifiedImage->setPixel(i,j,qRgb(0, 0, 0));
                 }
             }
-            updateImages(false);
-
         }
+        updateImages(false);
+
+    }
 }
 
 /*TEMA4/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 1p*/
@@ -603,84 +603,119 @@ void MainWindow::on_actionMeanFilter_triggered()
     updateImages(false);
 }
 
-/* TEMA5///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/* TEMA5/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 1p*/
+void MainWindow::on_actionPrewitt_triggered()
+{
+    bool ok;
+    SmartDialog prewittFilter("Prewitt ", &ok);
+    t = prewittFilter.getFirstValue();
+    if (ok)
+        modifiedImage = new QImage(initialImage->width(),initialImage->height(),initialImage->format());
 
+    for (int i = 0; i < initialImage->width(); i ++)
+    {
+        for (int j = 0; j < initialImage->height(); j ++)
+        {
+            if (initialImage->width() - i > 3 && initialImage->height() - j > 3)
+            {
+                int x = (qGray(initialImage->pixel(i,j)) * -1) + (qGray(initialImage->pixel(i,j + 1)) * -1) + (qGray(initialImage->pixel(i,j + 2)) * -1) +
+                        (qGray(initialImage->pixel(i + 2,j)) * 1) + (qGray(initialImage->pixel(i + 2,j + 1)) * 1) + (qGray(initialImage->pixel(i + 2,j + 2)) * 1);
+
+                int y = (qGray(initialImage->pixel(i,j)) * -1) + (qGray(initialImage->pixel(i + 1,j)) * -1) + (qGray(initialImage->pixel(i + 2,j)) * -1) +
+                        (qGray(initialImage->pixel(i,j + 2)) * 1) + (qGray(initialImage->pixel(i + 1,j + 2)) * 1) + (qGray(initialImage->pixel(i + 2,j + 2)) * 1);
+
+                double xy = (double)sqrt((x*x) + (y*y));
+                if (xy > t)
+                {
+                    QColor c = QColor(255, 255, 255);
+                    modifiedImage->setPixelColor(i, j, c);
+                }
+                else
+                {
+                    QColor c = QColor(0, 0, 0);
+                    modifiedImage->setPixelColor(i, j, c);
+                }
+            }
+        }
+    }
+    updateImages(false);
+}
 
 /*TEMA6 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 2p*/
 void MainWindow::on_actionClosing_triggered()
 {
     modifiedImage = new QImage( initialImage->width(),initialImage->height(),QImage::Format_RGB888);
-            on_actionThresholding_triggered();
-                bool ok;
+    on_actionThresholding_triggered();
+    bool ok;
 
-             SmartDialog dialog("Matrice",&ok,1);
-                 if(ok)
-                 {   int a= dialog.getFirstValue();
+    SmartDialog dialog("Matrice",&ok,1);
+    if(ok)
+    {   int a= dialog.getFirstValue();
 
-                     int k=a/2;
+        int k=a/2;
 
-                 initialImage= new QImage(modifiedImage->width(),modifiedImage->height(),QImage::Format_RGB888);
+        initialImage= new QImage(modifiedImage->width(),modifiedImage->height(),QImage::Format_RGB888);
 
         //Dilatare daca am centrul alb si cel putin un vecin negru il fac negru
 
-                 for(int i=k;i<modifiedImage->width()-k;i++){
-                     for(int j=k;j<modifiedImage->height()-k;j++){
+        for(int i=k;i<modifiedImage->width()-k;i++){
+            for(int j=k;j<modifiedImage->height()-k;j++){
 
-                         if(qGray(modifiedImage->pixel(i,j))==0)
-                         { bool ok=true;
+                if(qGray(modifiedImage->pixel(i,j))==0)
+                { bool ok=true;
 
-                         for(int x=-k;x<=k ;x++){
-                             for(int y=-k;y<=k ;y++)
-                                 if(qGray(modifiedImage->pixel(i+x,j+y))==255) ok=false;
-
-
-                             }
-
-                         if(ok==false){
-                             initialImage->setPixel(i,j,qRgb(255,255,255));
+                    for(int x=-k;x<=k ;x++){
+                        for(int y=-k;y<=k ;y++)
+                            if(qGray(modifiedImage->pixel(i+x,j+y))==255) ok=false;
 
 
-                         }else{
-                             initialImage->setPixel(i,j,qRgb(0,0,0));
+                    }
 
-                              }
+                    if(ok==false){
+                        initialImage->setPixel(i,j,qRgb(255,255,255));
 
-                         }
-                     }
-                 }
+
+                    }else{
+                        initialImage->setPixel(i,j,qRgb(0,0,0));
+
+                    }
+
+                }
+            }
+        }
         //Erodare daca am centru negru si cel putin un vecin alb, colorez centrul alb
-                     for(int i=k;i<initialImage->width()-k;i++){
-                         for(int j=k;j<initialImage->height()-k;j++){
+        for(int i=k;i<initialImage->width()-k;i++){
+            for(int j=k;j<initialImage->height()-k;j++){
 
-                             if(qGray(initialImage->pixel(i,j))==255)
+                if(qGray(initialImage->pixel(i,j))==255)
 
-                             {
-                                 bool ok=true;
+                {
+                    bool ok=true;
 
-                             for(int x=-k;x<=k && ok ;x++){
-                                 for(int y=-k;y<=k && ok ;y++)
+                    for(int x=-k;x<=k && ok ;x++){
+                        for(int y=-k;y<=k && ok ;y++)
 
-                                     if(qGray(initialImage->pixel(i+x,j+y))==0) ok=false;
+                            if(qGray(initialImage->pixel(i+x,j+y))==0) ok=false;
 
-                             }
-                             if(ok==false)
-                             {
-                                 modifiedImage->setPixel(i,j,qRgb(0,0,0));
+                    }
+                    if(ok==false)
+                    {
+                        modifiedImage->setPixel(i,j,qRgb(0,0,0));
 
-                             }else{
-                                 modifiedImage->setPixel(i,j,qRgb(255,255,255));
+                    }else{
+                        modifiedImage->setPixel(i,j,qRgb(255,255,255));
 
-                                  }
-                             }
-                         }
-                     }
+                    }
+                }
+            }
+        }
 
         //
 
 
-                 }
+    }
 
-                 updateImages(false);
+    updateImages(false);
 }
 
 /* TEMA7/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 3p*/
@@ -734,6 +769,3 @@ void MainWindow::on_actionRotatiaCuInterpolare_triggered()
     }
     updateImages(false);
 }
-
-/* TEMA8///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-

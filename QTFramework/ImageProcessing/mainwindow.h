@@ -45,6 +45,7 @@ private slots:
     void on_actionBrightnessDiminishing_triggered();//2
     void on_actionColorBinarization_triggered();//3
     void on_actionMeanFilter_triggered();//4
+    void on_actionPrewitt_triggered(); //5
     void on_actionClosing_triggered();//6
     void on_actionRotatiaCuInterpolare_triggered();//7
 

@@ -49,6 +49,7 @@ public:
     QAction *actionClosing;
     QAction *actionRotatiaCuInterpolare;
     QAction *actionLaplace;
+    QAction *actionPrewitt;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QScrollArea *scrollArea;
@@ -72,7 +73,7 @@ public:
     QMenu *menuTema4;
     QMenu *menuTema6;
     QMenu *menuTema7;
-    QMenu *menuLAplace;
+    QMenu *menuTema5;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -117,6 +118,8 @@ public:
         actionRotatiaCuInterpolare->setObjectName(QStringLiteral("actionRotatiaCuInterpolare"));
         actionLaplace = new QAction(MainWindow);
         actionLaplace->setObjectName(QStringLiteral("actionLaplace"));
+        actionPrewitt = new QAction(MainWindow);
+        actionPrewitt->setObjectName(QStringLiteral("actionPrewitt"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -203,8 +206,8 @@ public:
         menuTema6->setObjectName(QStringLiteral("menuTema6"));
         menuTema7 = new QMenu(menuBar);
         menuTema7->setObjectName(QStringLiteral("menuTema7"));
-        menuLAplace = new QMenu(menuBar);
-        menuLAplace->setObjectName(QStringLiteral("menuLAplace"));
+        menuTema5 = new QMenu(menuBar);
+        menuTema5->setObjectName(QStringLiteral("menuTema5"));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -220,9 +223,9 @@ public:
         menuBar->addAction(menuTema2->menuAction());
         menuBar->addAction(menuTema3->menuAction());
         menuBar->addAction(menuTema4->menuAction());
+        menuBar->addAction(menuTema5->menuAction());
         menuBar->addAction(menuTema6->menuAction());
         menuBar->addAction(menuTema7->menuAction());
-        menuBar->addAction(menuLAplace->menuAction());
         menuFile->addAction(menuOpen->menuAction());
         menuFile->addAction(actionSave_as);
         menuOpen->addAction(actionGreyscale);
@@ -242,7 +245,7 @@ public:
         menuTema4->addAction(actionMeanFilter);
         menuTema6->addAction(actionClosing);
         menuTema7->addAction(actionRotatiaCuInterpolare);
-        menuLAplace->addAction(actionLaplace);
+        menuTema5->addAction(actionPrewitt);
 
         retranslateUi(MainWindow);
 
@@ -270,6 +273,7 @@ public:
         actionClosing->setText(QApplication::translate("MainWindow", "Closing", Q_NULLPTR));
         actionRotatiaCuInterpolare->setText(QApplication::translate("MainWindow", "RotatiaCuInterpolare", Q_NULLPTR));
         actionLaplace->setText(QApplication::translate("MainWindow", "Laplace", Q_NULLPTR));
+        actionPrewitt->setText(QApplication::translate("MainWindow", "Prewitt", Q_NULLPTR));
         label->setText(QString());
         label_2->setText(QString());
         btnSaveAsInitialImage->setText(QApplication::translate("MainWindow", "Save as Initial Image", Q_NULLPTR));
@@ -284,7 +288,7 @@ public:
         menuTema4->setTitle(QApplication::translate("MainWindow", "Tema4", Q_NULLPTR));
         menuTema6->setTitle(QApplication::translate("MainWindow", "Tema6", Q_NULLPTR));
         menuTema7->setTitle(QApplication::translate("MainWindow", "Tema7", Q_NULLPTR));
-        menuLAplace->setTitle(QApplication::translate("MainWindow", "LAplace", Q_NULLPTR));
+        menuTema5->setTitle(QApplication::translate("MainWindow", "Tema5", Q_NULLPTR));
     } // retranslateUi
 
 };

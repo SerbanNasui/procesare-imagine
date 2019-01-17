@@ -198,6 +198,12 @@
     </property>
     <addaction name="actionRotatiaCuInterpolare"/>
    </widget>
+   <widget class="QMenu" name="menuTema5">
+    <property name="title">
+     <string>Tema5</string>
+    </property>
+    <addaction name="actionPrewitt"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuLaunch_Smart_Dialog"/>
    <addaction name="menuTools"/>
@@ -205,6 +211,7 @@
    <addaction name="menuTema2"/>
    <addaction name="menuTema3"/>
    <addaction name="menuTema4"/>
+   <addaction name="menuTema5"/>
    <addaction name="menuTema6"/>
    <addaction name="menuTema7"/>
   </widget>
@@ -305,6 +312,11 @@
   <action name="actionLaplace">
    <property name="text">
     <string>Laplace</string>
+   </property>
+  </action>
+  <action name="actionPrewitt">
+   <property name="text">
+    <string>Prewitt</string>
    </property>
   </action>
  </widget>
