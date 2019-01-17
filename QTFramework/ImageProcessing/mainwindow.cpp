@@ -385,7 +385,7 @@ void MainWindow::on_actionGama_triggered()
     }
 }
 
-/*TEMA1///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*TEMA1/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 0,5*/
 //oglindit
 void MainWindow::on_actionMirroring_triggered()
 {
@@ -415,23 +415,24 @@ void MainWindow::on_actionMirroring_triggered()
 void MainWindow::on_actionThresholding_triggered()
 {
     bool val;
-    SmartDialog tresholding("Val: ", &val);
-    double t = tresholding.getFirstValue();
-    if(initialImage== nullptr)
-    {
-        return;
-    }
-    modifiedImage = new QImage( initialImage->width(),initialImage->height(),QImage::Format_RGB32);
-    for (int i = 0;  i < initialImage->width();  i++)
-    {
-        for (int j = 0; j < initialImage->height(); j++)
-        {
-            int gray = qGray(initialImage->pixel(i,j));
-            gray = gray < t ? 0 : 255;
-            initialImage->setPixel(i,j,QColor(gray, gray, gray).rgb());
-        }
-    }
-    updateImages(false);
+       SmartDialog tresholding("Val: ", &val);
+       double t = tresholding.getFirstValue();
+       if(initialImage== nullptr)
+       {
+           return;
+       }
+       modifiedImage = new QImage( initialImage->width(),initialImage->height(),QImage::Format_RGB32);
+       for (int i = 0;  i < initialImage->width();  i++)
+       {
+           for (int j = 0; j < initialImage->height(); j++)
+           {
+               int gray = qGray(initialImage->pixel(i,j));
+               gray = gray < t ? 0 : 255;
+               modifiedImage->setPixel(i,j,QColor(gray, gray, gray).rgb());
+           }
+       }
+       updateImages(false);
+
 }
 
 // histogama
@@ -451,9 +452,7 @@ void MainWindow::on_actionHistogram_triggered()
 
 }
 
-/*END TEMA1///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-
-/*TEMA2///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*TEMA2//////////////////////////////////////////////////////////////////z///////////////////////////////////////////////////////////////////////////////////////// 1p*/
 void MainWindow::on_actionBrightnessIncreasing_triggered()
 {
     modifiedImage = new QImage( initialImage->width(),initialImage->height(),QImage::Format_RGB888);
@@ -529,10 +528,7 @@ void MainWindow::on_actionBrightnessDiminishing_triggered()
     updateImages(false);
 }
 
-/*END TEMA2///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-
-/*TEMA3///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-
+/*TEMA3/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 1p*/
 void MainWindow::on_actionColorBinarization_triggered()
 {
     bool ok;
@@ -575,11 +571,7 @@ void MainWindow::on_actionColorBinarization_triggered()
         }
 }
 
-/*END TEMA3////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-
-
-/*TEMA4///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-
+/*TEMA4/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 1p*/
 void MainWindow::on_actionMeanFilter_triggered()
 {
     modifiedImage = new QImage( initialImage->width(),initialImage->height(),QImage::Format_RGB888);
@@ -611,6 +603,137 @@ void MainWindow::on_actionMeanFilter_triggered()
     updateImages(false);
 }
 
-/*END TEMA4///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/* TEMA5///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
-/*TEMA5 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+/*TEMA6 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 2p*/
+void MainWindow::on_actionClosing_triggered()
+{
+    modifiedImage = new QImage( initialImage->width(),initialImage->height(),QImage::Format_RGB888);
+            on_actionThresholding_triggered();
+                bool ok;
+
+             SmartDialog dialog("Matrice",&ok,1);
+                 if(ok)
+                 {   int a= dialog.getFirstValue();
+
+                     int k=a/2;
+
+                 initialImage= new QImage(modifiedImage->width(),modifiedImage->height(),QImage::Format_RGB888);
+
+        //Dilatare daca am centrul alb si cel putin un vecin negru il fac negru
+
+                 for(int i=k;i<modifiedImage->width()-k;i++){
+                     for(int j=k;j<modifiedImage->height()-k;j++){
+
+                         if(qGray(modifiedImage->pixel(i,j))==0)
+                         { bool ok=true;
+
+                         for(int x=-k;x<=k ;x++){
+                             for(int y=-k;y<=k ;y++)
+                                 if(qGray(modifiedImage->pixel(i+x,j+y))==255) ok=false;
+
+
+                             }
+
+                         if(ok==false){
+                             initialImage->setPixel(i,j,qRgb(255,255,255));
+
+
+                         }else{
+                             initialImage->setPixel(i,j,qRgb(0,0,0));
+
+                              }
+
+                         }
+                     }
+                 }
+        //Erodare daca am centru negru si cel putin un vecin alb, colorez centrul alb
+                     for(int i=k;i<initialImage->width()-k;i++){
+                         for(int j=k;j<initialImage->height()-k;j++){
+
+                             if(qGray(initialImage->pixel(i,j))==255)
+
+                             {
+                                 bool ok=true;
+
+                             for(int x=-k;x<=k && ok ;x++){
+                                 for(int y=-k;y<=k && ok ;y++)
+
+                                     if(qGray(initialImage->pixel(i+x,j+y))==0) ok=false;
+
+                             }
+                             if(ok==false)
+                             {
+                                 modifiedImage->setPixel(i,j,qRgb(0,0,0));
+
+                             }else{
+                                 modifiedImage->setPixel(i,j,qRgb(255,255,255));
+
+                                  }
+                             }
+                         }
+                     }
+
+        //
+
+
+                 }
+
+                 updateImages(false);
+}
+
+/* TEMA7/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 3p*/
+void MainWindow::on_actionRotatiaCuInterpolare_triggered()
+{
+    modifiedImage = new QImage( initialImage->width(),initialImage->height(),QImage::Format_RGB888);
+    bool ok=false;
+    double xCent=initialImage->width()/2;
+    double yCent=initialImage->height()/2;
+    double xc;
+    double yc;
+    double theta;
+    SmartDialog Grade("InsertGrade",&ok,1);
+    if(ok){
+        theta =Grade.getFirstValue();
+    }
+    qDebug()<<theta;
+    double O =( theta * M_PI) / 180;
+    for (int xP = 0;  xP < modifiedImage->width();  xP++)
+    {
+        for (int yP = 0; yP < modifiedImage->height(); yP++)
+        {
+            xc=(xP-xCent)*qCos(O)+(yP-yCent)*qSin(O)+xCent;
+            yc=-(xP-xCent)*qSin(O)+(yP-yCent)*qCos(O)+yCent;
+            if( xc < modifiedImage->width()-1 && xc>0 && yc>0 && yc<modifiedImage->height()-1 )
+            {
+                int Xintreg = (int)xc;
+                int Yintreg = (int)yc;
+                double val1 =(xc - Xintreg) * (qGray(initialImage->pixel(Xintreg +1, Yintreg))
+                                               -qGray(initialImage->pixel(Xintreg, Yintreg)))
+                        +qGray(initialImage->pixel(Xintreg, Yintreg)) ;
+
+                double val2 =(xc - Xintreg) * (qGray(initialImage->pixel(Xintreg +1, Yintreg+1))
+                                               -qGray(initialImage->pixel(Xintreg, Yintreg+1)))
+                        +qGray(initialImage->pixel(Xintreg, Yintreg+1)) ;
+
+                double val3 =(yc - Yintreg) * (val2-val1)+val1;
+
+                modifiedImage->setPixel(xP,yP,qRgb(val3,val3,val3));
+
+            }else{
+                if(xc>=255||yc>=255){
+
+                    modifiedImage->setPixel(xP,yP,qRgb(0,0,0));
+                }
+                if(xc<=0||yc<=0){
+                    modifiedImage->setPixel(xP,yP,qRgb(0,0,0));
+                }
+            }
+        }
+    }
+    updateImages(false);
+}
+
+/* TEMA8///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+

@@ -37,13 +37,18 @@ private slots:
     void on_actionPlot_grey_level_triggered();
     void on_actionLaunch_magnifier_triggered();
     void on_actionGama_triggered();
-    void on_actionMirroring_triggered();
-    void on_actionThresholding_triggered();
-    void on_actionHistogram_triggered();
-    void on_actionBrightnessIncreasing_triggered();
-    void on_actionBrightnessDiminishing_triggered();
-    void on_actionColorBinarization_triggered();
-    void on_actionMeanFilter_triggered();
+
+    void on_actionMirroring_triggered();//1
+    void on_actionThresholding_triggered();//1
+    void on_actionHistogram_triggered();//1
+    void on_actionBrightnessIncreasing_triggered();//2
+    void on_actionBrightnessDiminishing_triggered();//2
+    void on_actionColorBinarization_triggered();//3
+    void on_actionMeanFilter_triggered();//4
+    void on_actionClosing_triggered();//6
+    void on_actionRotatiaCuInterpolare_triggered();//7
+
+
 
 
 
@@ -58,6 +63,7 @@ private:
     bool isMousedPressedOnModifiedImage(QObject *obj, QEvent *event);
     void plotGreyPixels(int y, QImage* image) const;
     int* histogram();
+
 
 private:
     int x;

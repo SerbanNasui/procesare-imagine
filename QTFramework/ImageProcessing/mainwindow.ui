@@ -186,6 +186,18 @@
     </property>
     <addaction name="actionMeanFilter"/>
    </widget>
+   <widget class="QMenu" name="menuTema6">
+    <property name="title">
+     <string>Tema6</string>
+    </property>
+    <addaction name="actionClosing"/>
+   </widget>
+   <widget class="QMenu" name="menuTema7">
+    <property name="title">
+     <string>Tema7</string>
+    </property>
+    <addaction name="actionRotatiaCuInterpolare"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuLaunch_Smart_Dialog"/>
    <addaction name="menuTools"/>
@@ -193,6 +205,8 @@
    <addaction name="menuTema2"/>
    <addaction name="menuTema3"/>
    <addaction name="menuTema4"/>
+   <addaction name="menuTema6"/>
+   <addaction name="menuTema7"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -276,6 +290,21 @@
   <action name="actionMeanFilter">
    <property name="text">
     <string>MeanFilter</string>
+   </property>
+  </action>
+  <action name="actionClosing">
+   <property name="text">
+    <string>Closing</string>
+   </property>
+  </action>
+  <action name="actionRotatiaCuInterpolare">
+   <property name="text">
+    <string>RotatiaCuInterpolare</string>
+   </property>
+  </action>
+  <action name="actionLaplace">
+   <property name="text">
+    <string>Laplace</string>
    </property>
   </action>
  </widget>

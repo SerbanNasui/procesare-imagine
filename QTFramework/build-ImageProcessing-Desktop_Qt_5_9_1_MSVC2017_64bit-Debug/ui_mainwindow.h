@@ -46,6 +46,9 @@ public:
     QAction *actionBrightnessDiminishing;
     QAction *actionColorBinarization;
     QAction *actionMeanFilter;
+    QAction *actionClosing;
+    QAction *actionRotatiaCuInterpolare;
+    QAction *actionLaplace;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QScrollArea *scrollArea;
@@ -67,6 +70,9 @@ public:
     QMenu *menuTema2;
     QMenu *menuTema3;
     QMenu *menuTema4;
+    QMenu *menuTema6;
+    QMenu *menuTema7;
+    QMenu *menuLAplace;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -105,6 +111,12 @@ public:
         actionColorBinarization->setObjectName(QStringLiteral("actionColorBinarization"));
         actionMeanFilter = new QAction(MainWindow);
         actionMeanFilter->setObjectName(QStringLiteral("actionMeanFilter"));
+        actionClosing = new QAction(MainWindow);
+        actionClosing->setObjectName(QStringLiteral("actionClosing"));
+        actionRotatiaCuInterpolare = new QAction(MainWindow);
+        actionRotatiaCuInterpolare->setObjectName(QStringLiteral("actionRotatiaCuInterpolare"));
+        actionLaplace = new QAction(MainWindow);
+        actionLaplace->setObjectName(QStringLiteral("actionLaplace"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -187,6 +199,12 @@ public:
         menuTema3->setObjectName(QStringLiteral("menuTema3"));
         menuTema4 = new QMenu(menuBar);
         menuTema4->setObjectName(QStringLiteral("menuTema4"));
+        menuTema6 = new QMenu(menuBar);
+        menuTema6->setObjectName(QStringLiteral("menuTema6"));
+        menuTema7 = new QMenu(menuBar);
+        menuTema7->setObjectName(QStringLiteral("menuTema7"));
+        menuLAplace = new QMenu(menuBar);
+        menuLAplace->setObjectName(QStringLiteral("menuLAplace"));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -202,6 +220,9 @@ public:
         menuBar->addAction(menuTema2->menuAction());
         menuBar->addAction(menuTema3->menuAction());
         menuBar->addAction(menuTema4->menuAction());
+        menuBar->addAction(menuTema6->menuAction());
+        menuBar->addAction(menuTema7->menuAction());
+        menuBar->addAction(menuLAplace->menuAction());
         menuFile->addAction(menuOpen->menuAction());
         menuFile->addAction(actionSave_as);
         menuOpen->addAction(actionGreyscale);
@@ -219,6 +240,9 @@ public:
         menuTema2->addAction(actionBrightnessDiminishing);
         menuTema3->addAction(actionColorBinarization);
         menuTema4->addAction(actionMeanFilter);
+        menuTema6->addAction(actionClosing);
+        menuTema7->addAction(actionRotatiaCuInterpolare);
+        menuLAplace->addAction(actionLaplace);
 
         retranslateUi(MainWindow);
 
@@ -243,6 +267,9 @@ public:
         actionBrightnessDiminishing->setText(QApplication::translate("MainWindow", "BrightnessDiminishing", Q_NULLPTR));
         actionColorBinarization->setText(QApplication::translate("MainWindow", "ColorBinarization", Q_NULLPTR));
         actionMeanFilter->setText(QApplication::translate("MainWindow", "MeanFilter", Q_NULLPTR));
+        actionClosing->setText(QApplication::translate("MainWindow", "Closing", Q_NULLPTR));
+        actionRotatiaCuInterpolare->setText(QApplication::translate("MainWindow", "RotatiaCuInterpolare", Q_NULLPTR));
+        actionLaplace->setText(QApplication::translate("MainWindow", "Laplace", Q_NULLPTR));
         label->setText(QString());
         label_2->setText(QString());
         btnSaveAsInitialImage->setText(QApplication::translate("MainWindow", "Save as Initial Image", Q_NULLPTR));
@@ -255,6 +282,9 @@ public:
         menuTema2->setTitle(QApplication::translate("MainWindow", "Tema2", Q_NULLPTR));
         menuTema3->setTitle(QApplication::translate("MainWindow", "Tema3", Q_NULLPTR));
         menuTema4->setTitle(QApplication::translate("MainWindow", "Tema4", Q_NULLPTR));
+        menuTema6->setTitle(QApplication::translate("MainWindow", "Tema6", Q_NULLPTR));
+        menuTema7->setTitle(QApplication::translate("MainWindow", "Tema7", Q_NULLPTR));
+        menuLAplace->setTitle(QApplication::translate("MainWindow", "LAplace", Q_NULLPTR));
     } // retranslateUi
 
 };
